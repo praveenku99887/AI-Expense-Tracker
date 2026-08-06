@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build:
+      context: ./expense-tracker-ai
+    container_name: expense-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./expense-tracker-ai/.env
+    restart: always
+
+  frontend:
+    build:
+      context: ./expense-tracker-frontend
+    container_name: expense-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
